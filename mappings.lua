@@ -19,6 +19,16 @@ M.general = {
   },
 }
 
--- more keybinds!
+M.nvimtree = {
+  plugin = true,
+
+  n = {
+    -- toggle
+    ["<C-b>"] = { "<cmd> NvimTreeToggle <CR>", "Toggle nvimtree" },
+
+    -- focus
+    ["<leader>e"] = { "<cmd> NvimTreeFocus <CR>", "Focus nvimtree" },
+  },
+}
 
 return M
