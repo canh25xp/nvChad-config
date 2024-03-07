@@ -1,5 +1,3 @@
-local overrides = require("custom.configs.overrides")
-
 local plugins = {
 
   -- Override plugin definition options
@@ -9,23 +7,79 @@ local plugins = {
     config = function()
       require "plugins.configs.lspconfig"
       require "custom.configs.lspconfig"
-    end, -- Override to setup mason-lspconfig
+    end,
   },
 
-  -- override plugin configs
   {
     "williamboman/mason.nvim",
-    opts = overrides.mason
+    opts = {
+      ensure_installed = {
+        -- lua stuff
+        "lua-language-server",
+        "stylua",
+
+        -- web dev stuff
+        "css-lsp",
+        "html-lsp",
+        "typescript-language-server",
+        "deno",
+        "prettier",
+
+        -- c/cpp stuff
+        "clangd",
+        "clang-format",
+
+        -- shell stuff
+        "shfmt",
+
+        -- python stuff
+        "pyright",
+      },
+    },
   },
 
   {
     "nvim-treesitter/nvim-treesitter",
-    opts = overrides.treesitter,
+    opts = {
+      ensure_installed = {
+        -- default
+        "vim",
+        "vimdoc",
+        "lua",
+
+        -- web dev 
+        "html",
+        "css",
+        "javascript",
+        "typescript",
+        "tsx",
+        "json",
+
+        -- dev
+        "c",
+        "markdown",
+        "markdown_inline",
+        "python"
+      },
+    },
   },
 
   {
     "nvim-tree/nvim-tree.lua",
-    opts = overrides.nvimtree,
+    opts = {
+      git = {
+        enable = true,
+      },
+
+      renderer = {
+        highlight_git = true,
+        icons = {
+          show = {
+            git = true,
+          },
+        },
+      },
+    },
   },
 
   -- Install a plugin
@@ -43,6 +97,19 @@ local plugins = {
     -- event = "BufWritePre"
     config = function()
       require "custom.configs.conform"
+    end,
+  },
+
+  {
+    "nvim-telescope/telescope.nvim",
+    opts = function()
+      local conf = require "plugins.configs.telescope"
+      conf.defaults.mappings.i = {
+        ["<C-j>"] = require("telescope.actions").move_selection_next,
+        ["<Esc>"] = require("telescope.actions").close,
+      }
+
+      return conf
     end,
   },
 

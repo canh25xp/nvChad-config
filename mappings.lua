@@ -1,33 +1,43 @@
----@type MappingsTable
+---MappingsTable
 local M = {}
 
 M.general = {
   n = {
     [";"] = { ":", "enter command mode", opts = { nowait = true } },
 
-    --  format with conform
     ["<leader>fm"] = {
       function()
         require("conform").format()
       end,
       "formatting",
-    }
+    },
 
+    ["<leader>tt"] = {
+      function()
+        require("base46").toggle_transparency()
+      end,
+      "toggle transparency",
+    },
   },
+
   v = {
-    [">"] = { ">gv", "indent"},
+    [">"] = { ">gv", "indent" },
+  },
+
+  i = {
+    ["jj"] = { "<ESC>", "escape insert mode", opts = { nowait = true } },
+  },
+}
+
+M.disabled = {
+  n = {
+    ["<C-n>"] = "",
   },
 }
 
 M.nvimtree = {
-  plugin = true,
-
   n = {
-    -- toggle
     ["<C-b>"] = { "<cmd> NvimTreeToggle <CR>", "Toggle nvimtree" },
-
-    -- focus
-    ["<leader>e"] = { "<cmd> NvimTreeFocus <CR>", "Focus nvimtree" },
   },
 }
 
