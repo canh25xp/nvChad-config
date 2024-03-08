@@ -41,4 +41,24 @@ M.nvimtree = {
   },
 }
 
+M.nvterm = {
+  t = {
+    ["<C-j>"] = {
+      function()
+        require("nvterm.terminal").toggle "horizontal"
+      end,
+      "Toggle horizontal term",
+    },
+  },
+
+  n = {
+    ["<C-j>"] = {
+      function()
+        require("nvterm.terminal").toggle "horizontal"
+      end,
+      "Toggle horizontal term",
+    },
+  },
+}
+
 return M
